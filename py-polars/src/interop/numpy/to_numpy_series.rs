@@ -25,7 +25,8 @@ impl PySeries {
     /// This method copies data only when necessary. Set `allow_copy` to raise an error if copy
     /// is required. Set `writable` to make sure the resulting array is writable, possibly requiring
     /// copying the data.
-    fn to_numpy(&self, py: Python, writable: bool, allow_copy: bool) -> PyResult<PyObject> {
+    #[pyo3(signature = (writable, allow_copy, mask = false))]
+    fn to_numpy(&self, py: Python, writable: bool, allow_copy: bool, mask: bool) -> PyResult<PyObject> {
         series_to_numpy(py, &self.series, writable, allow_copy)
     }
 
